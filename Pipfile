@@ -4,8 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+mne = "*"
+plotly = "*"
+pandas = "*"
+plotly-resampler = "*"
+bipolar-explorer-mne = {file = ".", editable = true}
 
 [dev-packages]
+build = "*"
 
 [requires]
 python_version = "3.9"
