@@ -44,24 +44,24 @@ pip install git+https://github.com/anascacais/BipolarExplorerMNE.git
 
 ---
 
-## 🧪 Usage
+## Usage
 
 ```python
-from bipolarview import BipolarViewer
+from bipolar_explorer_mne.bipolar_explorer import BipolarExplorer
 
 # Load the data
-viewer = BipolarViewer("your_data_file.edf")
+explorer = BipolarExplorer(filepath='TA003634.edf')
 
 # Optional: list all available channels
-viewer.list_channels()
+explorer.list_channels()
 
-# Visualize combinations (e.g., ECG-type channels)
-viewer.plot_bipolar(["E", "Ecg", "ECG-", "ECG+"])
+# Open the UI
+bipolar_config, id = explorer.explore()
 ```
 
 ---
 
-## 🧠 Notes
+## Notes
 
 - This tool is primarily meant for **channel exploration**, not as an automated pipeline.
 - You should still verify the actual electrode placements and channel meaning based on metadata or clinical notes when available.
