@@ -59,7 +59,7 @@ class BipolarExplorer:
             ui_id = self._get_id_ui(self.filepath)
 
         except UnicodeDecodeError:
-            return None
+            return None, None
 
         return ui_channels, ui_id
 

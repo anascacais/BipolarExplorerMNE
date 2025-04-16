@@ -50,7 +50,7 @@ pip install git+https://github.com/anascacais/BipolarExplorerMNE.git
 from bipolar_explorer_mne.bipolar_explorer import BipolarExplorer
 
 # Load the data
-explorer = BipolarExplorer(filepath='TA003634.edf')
+explorer = BipolarExplorer(filepath='test_file.edf')
 
 # Optional: list all available channels
 explorer.list_channels()
