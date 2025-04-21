@@ -56,7 +56,7 @@ explorer = BipolarExplorer(filepath='test_file.edf')
 explorer.list_channels()
 
 # Open the UI
-bipolar_config, id = explorer.explore()
+bipolar_config, id = explorer.explore(extra_ui_info=['id'])
 ```
 
 ---

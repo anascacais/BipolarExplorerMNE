@@ -38,30 +38,34 @@ class BipolarExplorer:
             substring in ch.lower() for substring in eeg_channels)]
         return available_channels
 
-    def explore(self, bipolar_chn_name='Bipolar ECG'):
+    def explore(self, bipolar_chn_name='Bipolar ECG', extra_ui_info=['id']):
         ''' Function description 
 
         Parameters
         ---------- 
         bipolar_chn_name : str
             Name to give the bipolar channel that will be created.
+        extra_ui_info : list
+            List of strings, corresponding to extra info that the user should input for each file.
 
         Returns
         -------
         ui_channels : str
             Names of the chosen channels, in the format "ch1,chn2". 
-        ui_id : str
-            Chosen ID for the file/subject. 
+        *ui_replies : str
+            Variable number of outputs, with the same length as extra_ui_info.
         '''
 
         try:
             ui_channels = self._get_channels_ui(bipolar_chn_name)
-            ui_id = self._get_id_ui(self.filepath)
+            ui_replies = []
+            for ui_info in extra_ui_info:
+                ui_replies = self._get_extra_ui_info(ui_info, self.filepath)
 
         except UnicodeDecodeError:
-            return None, None
+            return None, *([None]*len(extra_ui_info))
 
-        return ui_channels, ui_id
+        return ui_channels, *ui_replies
 
     def _get_channels_ui(self, bipolar_chn_name):
         ''' From all available channels that are not EEG (or at least labeled using the conventional 10-20 system), visualize in real time to choose a bipolar configuration. A terminal input will allow for the choice of channels. Input is case- and spacing-sensitive and should be in the format ch1,chn2. Trailing spaces do not matter (i.e. ch1,    chn2).  
@@ -103,7 +107,7 @@ class BipolarExplorer:
 
         return ui_channels
 
-    def _get_id_ui(self, filename):
+    def _get_extra_ui_info(self, ui_info, filename):
         ''' Function description 
 
         Parameters
@@ -116,7 +120,7 @@ class BipolarExplorer:
         result : bool
             Description
         '''
-        ui_id = input(f'Set patient ID for file {filename}\n: ')
+        ui_id = input(f'Set patient {ui_info} for file {filename}\n: ')
         if len(ui_id) == 0:
             ui_id = None
         return ui_id
