@@ -60,7 +60,7 @@ class BipolarExplorer:
             ui_channels = self._get_channels_ui(bipolar_chn_name)
             ui_replies = []
             for ui_info in extra_ui_info:
-                ui_replies = self._get_extra_ui_info(ui_info, self.filepath)
+                ui_replies += [self._get_extra_ui_info(ui_info, self.filepath)]
 
         except UnicodeDecodeError:
             return None, *([None]*len(extra_ui_info))
